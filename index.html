@@ -104,14 +104,15 @@
     <div class="ios-text">
       Sa bawat pagsubok, sa bawat ligaya, nandito lang ako palagi. Mahal na mahal kita, at excited na akong makasama ka pa sa mas marami pang buwan, taon, at habangbuhay.
     </div>
-    <button class="ios-button" onclick="showMemories()">Open Memories</button>
-    <div class="memories" id="memories">
-      <img src="https://iili.io/FqSDiYb.md.jpg" alt="Memory 1">
-      <img src="https://iili.io/FqSDLyx.md.jpg" alt="Memory 2">
-      <img src="https://iili.io/FqSDZTQ.md.jpg" alt="Memory 3">
-    </div><div id="passwordPrompt">
+    <button class="ios-button" id="openMemories">Open Memories</button><div class="memories" id="memories">
+  <img src="https://iili.io/FqSDiYb.md.jpg" alt="Memory 1">
+  <img src="https://iili.io/FqSDLyx.md.jpg" alt="Memory 2">
+  <img src="https://iili.io/FqSDZTQ.md.jpg" alt="Memory 3">
+</div>
+
+<div id="passwordPrompt">
   <input type="password" id="secretKey" placeholder="Enter password to unlock">
-  <button class="ios-button" onclick="checkPassword()">Unlock</button>
+  <button class="ios-button" id="unlockSecret">Unlock</button>
 </div>
 
 <div class="secret-memories" id="secret">
@@ -121,21 +122,32 @@
 </div>
 
   </div>  <script>
-    function showMemories() {
-      document.getElementById('memories').style.display = 'flex';
-    }
+    document.addEventListener("DOMContentLoaded", () => {
+      const openMemories = document.getElementById("openMemories");
+      const memories = document.getElementById("memories");
+      const secretTrigger = document.getElementById("secretTrigger");
+      const passwordPrompt = document.getElementById("passwordPrompt");
+      const unlockSecret = document.getElementById("unlockSecret");
+      const secret = document.getElementById("secret");
 
-    function checkPassword() {
-      const pass = document.getElementById('secretKey').value;
-      if (pass === "April 10, 2025") {
-        document.getElementById('secret').style.display = 'flex';
-      } else {
-        alert("Wrong password!");
-      }
-    }
+      openMemories.addEventListener("click", () => {
+        memories.style.display = "flex";
+        memories.scrollIntoView({ behavior: "smooth" });
+      });
 
-    document.getElementById('secretTrigger').addEventListener('click', () => {
-      document.getElementById('passwordPrompt').style.display = 'flex';
+      secretTrigger.addEventListener("click", () => {
+        passwordPrompt.style.display = "flex";
+      });
+
+      unlockSecret.addEventListener("click", () => {
+        const pass = document.getElementById("secretKey").value;
+        if (pass === "April 10, 2025") {
+          secret.style.display = "flex";
+          secret.scrollIntoView({ behavior: "smooth" });
+        } else {
+          alert("Wrong password!");
+        }
+      });
     });
   </script></body>
-</html>
+  </html>
