@@ -1,0 +1,9 @@
+{
+  "name": "Happy 3rd Monthsary, Baby!",
+  "short_name": "3rdMonthsary",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#ffd1ff",
+  "theme_color": "#ffa3fd",
+  "icons": []
+}

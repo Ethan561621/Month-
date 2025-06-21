@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>3rd Monthsary, Baby!</title>
+
+  <script>
+    // EARLY DEVICE WHITELIST BLOCKER
+    const allowedDevices = [
+      { width: 800, height: 1280, userAgent: 'Lenovo' },
+      { width: 1080, height: 2400, userAgent: 'HONOR' }
+    ];
+
+    const w = screen.width;
+    const h = screen.height;
+    const ua = navigator.userAgent.toLowerCase();
+
+    const isAllowed = allowedDevices.some(dev =>
+      dev.width === w &&
+      dev.height === h &&
+      ua.includes(dev.userAgent.toLowerCase())
+    );
+
+    if (!isAllowed) {
+      document.write(`
+        <style>
+          body {
+            background: black;
+            color: red;
+            font-family: monospace;
+            text-align: center;
+            padding-top: 30vh;
+            animation: flicker 0.2s infinite alternate;
+          }
+          @keyframes flicker {
+            0% {opacity: 0.3;}
+            100% {opacity: 1;}
+          }
+        </style>
+        <h1>🚫 ACCESS DENIED</h1>
+        <p>This page is heavily optimized for the creator's device and your device only.<br>
+        Using other devices may cause severe lags and glitches and may result into a software crash.</p>
+      `);
+      throw new Error("Blocked Device");
+    }
+  </script>
+
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro", sans-serif;
+      background: linear-gradient(to bottom, #f8f9fa, #e5e5ea);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      height: 100vh;
+      overflow-y: auto;
+    }
+
+    .dynamic-island {
+      margin-top: 25px;
+      width: 200px;
+      height: 35px;
+      background: rgba(0, 0, 0, 0.8);
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 14px;
+    }
+
+    .ios-card {
+      margin-top: 30px;
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(15px);
+      -webkit-backdrop-filter: blur(15px);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      border-radius: 30px;
+      padding: 20px;
+      width: 90%;
+      max-width: 400px;
+      text-align: center;
+    }
+
+    .ios-title {
+      font-size: 24px;
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+
+    .ios-text {
+      font-size: 16px;
+      color: #333;
+      margin-bottom: 10px;
+    }
+
+    .memories img {
+      width: 100%;
+      max-width: 360px;
+      border-radius: 20px;
+      margin-bottom: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    }
+
+    #secretBtn {
+      position: fixed;
+      top: 10px;
+      right: 10px;
+      background: red;
+      color: white;
+      border-radius: 50%;
+      width: 35px;
+      height: 35px;
+      font-size: 18px;
+      font-weight: bold;
+      border: none;
+      z-index: 99;
+      cursor: pointer;
+    }
+
+    #secretArrow {
+      position: fixed;
+      top: 50px;
+      right: 10px;
+      font-size: 24px;
+      color: red;
+      display: none;
+      z-index: 99;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="dynamic-island">❤️ Happy 3rd!</div>
+
+  <div class="ios-card">
+    <div class="ios-title">3rd Monthsary, Baby!</div>
+    <div class="ios-text">
+      Baby, tatlong buwan na tayong magkasama pero pakiramdam ko parang kahapon lang nung una tayong nagkakilala.
+      Salamat sa walang sawang pag-aalaga, sa bawat ngiti, at sa pagmamahal na hindi ko maipaliwanag kung gaano ko pinahahalagahan.
+    </div>
+    <div class="ios-text">
+      Sa bawat pagsubok, sa bawat ligaya, nandito lang ako palagi. Mahal na mahal kita, at excited na akong makasama ka pa sa mas marami pang buwan, taon, at habangbuhay.
+    </div>
+  </div>
+
+  <div class="ios-card memories">
+    <div class="ios-title">📸 Our Memories Together</div>
+    <img src="https://iili.io/FqSDiYb.md.jpg" alt="Memory 1">
+    <img src="https://iili.io/FqSDLyx.md.jpg" alt="Memory 2">
+    <img src="https://iili.io/FqSDZTQ.md.jpg" alt="Memory 3">
+  </div>
+
+  <!-- 🔒 Hidden Secret Section -->
+  <div id="secretSection" style="display:none;" class="ios-card memories">
+    <div class="ios-title">🔒 Secret Photos</div>
+    <img src="https://iili.io/FqSZx3b.jpg" alt="Secret 1">
+    <img src="https://iili.io/FqSZn6u.jpg" alt="Secret 2">
+    <img src="https://iili.io/FqSZzaj.jpg" alt="Secret 3">
+  </div>
+
+  <!-- Secret Access Button + Arrow -->
+  <button id="secretBtn" onclick="enterSecret()">!</button>
+  <div id="secretArrow">⬅</div>
+
+  <script>
+    // SECRET BUTTON LOGIC
+    function enterSecret() {
+      const pass = prompt("Enter password:");
+      if (pass === "April 10, 2025") {
+        document.getElementById('secretSection').style.display = 'block';
+      } else {
+        alert("Incorrect password!");
+      }
+    }
+
+    // ARROW TIMER
+    const arrow = document.getElementById('secretArrow');
+    setInterval(() => {
+      arrow.style.display = 'block';
+      setTimeout(() => arrow.style.display = 'none', 2000);
+    }, 22000);
+  </script>
+</body>
+</html>
