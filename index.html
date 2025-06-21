@@ -14,6 +14,7 @@
       align-items: center;
       justify-content: flex-start;
       height: 100vh;
+      position: relative;
     }
     .dynamic-island {
       margin-top: 25px;
@@ -62,34 +63,38 @@
     .ios-button:hover {
       background: #0059c1;
     }
-    #block-screen {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      background-color: rgba(0, 0, 0, 0.9);
-      color: red;
-      font-size: 1.3rem;
-      font-weight: bold;
-      display: flex;
+    .memories, .secret-memories, #passwordPrompt {
+      margin-top: 20px;
+      display: none;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
-      z-index: 9999;
     }
-    #bypass-form {
-      margin-top: 20px;
+    .memories img, .secret-memories img {
+      width: 90%;
+      max-width: 300px;
+      border-radius: 20px;
+      margin: 10px 0;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
     }
-    #bypass-form input {
+    .password-input input {
       padding: 10px;
       border-radius: 10px;
-      border: none;
-      font-size: 1rem;
+      border: 1px solid #ccc;
+      width: 70%;
+    }
+    #secretTrigger {
+      position: absolute;
+      top: 5px;
+      left: 10px;
+      font-size: 16px;
+      color: #999;
+      cursor: pointer;
+      user-select: none;
     }
   </style>
 </head>
 <body>
+  <div id="secretTrigger">!</div>
   <div class="dynamic-island">❤️ Happy 3rd Monthsary!</div>
   <div class="ios-card">
     <div class="ios-title">3rd Monthsary, Baby!</div>
@@ -99,38 +104,38 @@
     <div class="ios-text">
       Sa bawat pagsubok, sa bawat ligaya, nandito lang ako palagi. Mahal na mahal kita, at excited na akong makasama ka pa sa mas marami pang buwan, taon, at habangbuhay.
     </div>
-    <button class="ios-button">Open Memories</button>
-  </div>  <div id="block-screen" style="display: none">
-    ACCESS DENIED: Unsupported Device
-    <form id="bypass-form">
-      <input type="text" id="bypass-key" placeholder="Enter Bypass Key" />
-    </form>
+    <button class="ios-button" onclick="showMemories()">Open Memories</button>
+    <div class="memories" id="memories">
+      <img src="https://iili.io/FqSDiYb.md.jpg" alt="Memory 1">
+      <img src="https://iili.io/FqSDLyx.md.jpg" alt="Memory 2">
+      <img src="https://iili.io/FqSDZTQ.md.jpg" alt="Memory 3">
+    </div><div id="passwordPrompt">
+  <input type="password" id="secretKey" placeholder="Enter password to unlock">
+  <button class="ios-button" onclick="checkPassword()">Unlock</button>
+</div>
+
+<div class="secret-memories" id="secret">
+  <img src="https://iili.io/FqSZx3b.jpg" alt="Secret 1">
+  <img src="https://iili.io/FqSZn6u.jpg" alt="Secret 2">
+  <img src="https://iili.io/FqSZzaj.jpg" alt="Secret 3">
+</div>
+
   </div>  <script>
-    const whitelist = [800, 1080];
-    const safeHeights = [1126, 2340];
-    const currentWidth = window.screen.width;
-    const currentHeight = window.screen.height;
-    const key = "September 8, 2011";
-
-    function checkBypass() {
-      return localStorage.getItem("unlocked") === "true";
+    function showMemories() {
+      document.getElementById('memories').style.display = 'flex';
     }
 
-    function allowAccess() {
-      document.getElementById("block-screen").style.display = "none";
-    }
-
-    if (!whitelist.includes(currentWidth) || !safeHeights.includes(currentHeight)) {
-      if (!checkBypass()) {
-        document.getElementById("block-screen").style.display = "flex";
-        document.getElementById("bypass-form").addEventListener("submit", function(e) {
-          e.preventDefault();
-          if (document.getElementById("bypass-key").value === key) {
-            localStorage.setItem("unlocked", "true");
-            allowAccess();
-          }
-        });
+    function checkPassword() {
+      const pass = document.getElementById('secretKey').value;
+      if (pass === "April 10, 2025") {
+        document.getElementById('secret').style.display = 'flex';
+      } else {
+        alert("Wrong password!");
       }
     }
+
+    document.getElementById('secretTrigger').addEventListener('click', () => {
+      document.getElementById('passwordPrompt').style.display = 'flex';
+    });
   </script></body>
 </html>
